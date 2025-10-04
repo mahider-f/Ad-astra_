@@ -1,0 +1,551 @@
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background: #000000;
+  color: #ffffff;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+}
+
+/* Converted modal to dismissible header banner */
+.disclaimer-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+  border-bottom: 3px solid #3b82f6;
+  z-index: 4000;
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.6);
+  animation: slideDown 0.4s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.disclaimer-banner.hidden {
+  display: none;
+}
+
+.disclaimer-banner-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 20px;
+  gap: 16px;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.disclaimer-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.disclaimer-banner-content p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #ffffff;
+  flex: 1;
+  text-align: center;
+}
+
+.disclaimer-banner-content strong {
+  font-weight: 700;
+}
+
+.disclaimer-close {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.disclaimer-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.panel {
+  flex: 0 0 340px;
+  max-width: 100%;
+  background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+  border-right: 3px solid #2563eb;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  box-sizing: border-box;
+  box-shadow: 4px 0 20px rgba(37, 99, 235, 0.3);
+  padding: 20px;
+  gap: 14px;
+  overflow-y: auto;
+}
+
+.panel h2 {
+  margin: 0 0 10px 0;
+  color: #3b82f6;
+  font-size: 1.4rem;
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+  text-align: center;
+}
+
+label {
+  font-weight: 600;
+  margin-top: 6px;
+  font-size: 0.95rem;
+  color: #93c5fd;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  padding: 10px;
+  font-size: 0.95rem;
+  background: #1a1a1a;
+  border: 2px solid #2563eb;
+  border-radius: 8px;
+  color: white;
+  transition: all 0.2s;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+}
+
+#map {
+  flex: 1;
+  z-index: 1;
+  border-left: 3px solid #2563eb;
+  height: 100%;
+  width: 100%;
+}
+
+@keyframes screenShake {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translate(-5px, 5px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translate(5px, -5px);
+  }
+}
+
+.shake {
+  animation: screenShake 0.5s ease;
+}
+
+@keyframes flashEffect {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.flash-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 165, 0, 0.6) 50%, transparent 100%);
+  pointer-events: none;
+  z-index: 4000;
+  animation: flashEffect 0.6s ease;
+}
+
+.result-card {
+  background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  line-height: 1.8;
+  border: 2px solid #2563eb;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+}
+
+.result-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.1rem;
+  color: #3b82f6;
+  text-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+}
+
+.result-card b {
+  color: #93c5fd;
+}
+
+button {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  color: #ffffff;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: all 0.2s;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+}
+
+button:hover {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Repositioned controls to be horizontal and above map with higher z-index */
+.top-right-controls {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 2000;
+  display: flex;
+  gap: 12px;
+  flex-direction: row;
+}
+
+#asteroidOverlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 5000;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay-content {
+  position: relative;
+  width: 90%;
+  height: 90%;
+  max-width: 1200px;
+  background: #0a0a0a;
+  border-radius: 16px;
+  padding: 20px;
+  border: 3px solid #2563eb;
+  box-shadow: 0 8px 32px rgba(37, 99, 235, 0.4);
+}
+
+.overlay-content h2 {
+  color: #3b82f6;
+  text-align: center;
+  margin-top: 0;
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+#closeOverlay {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #2563eb;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 1.4rem;
+  font-weight: bold;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  padding: 0;
+  margin: 0;
+}
+
+#closeOverlay:hover {
+  background: #3b82f6;
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+}
+
+/* Chatbot positioned above map with higher z-index */
+.chatbot-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.5);
+  transition: all 0.3s ease;
+  padding: 0;
+  margin: 0;
+}
+
+.chatbot-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 25px rgba(59, 130, 246, 0.7);
+}
+
+.chatbot-widget {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 380px;
+  max-height: 600px;
+  background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+  border: 3px solid #2563eb;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(37, 99, 235, 0.4);
+  z-index: 2000;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chatbot-widget.active {
+  display: flex;
+}
+
+.chatbot-header {
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  color: white;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.chatbot-close {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  transition: transform 0.2s;
+}
+
+.chatbot-close:hover {
+  transform: scale(1.2);
+}
+
+.chatbot-content {
+  padding: 16px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.faq-item {
+  margin-bottom: 12px;
+}
+
+.faq-question {
+  width: 100%;
+  text-align: left;
+  padding: 12px;
+  background: #1a1a1a;
+  border: 2px solid #2563eb;
+  border-radius: 8px;
+  color: #93c5fd;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin: 0;
+}
+
+.faq-question:hover {
+  background: #2563eb;
+  color: white;
+  transform: translateX(4px);
+}
+
+.faq-answer {
+  display: none;
+  padding: 12px;
+  background: #0a0a0a;
+  border-left: 3px solid #3b82f6;
+  margin-top: 8px;
+  border-radius: 4px;
+  color: #e5e7eb;
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+.faq-answer p {
+  margin: 0 0 10px 0;
+}
+
+.faq-answer.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chatbot-content::-webkit-scrollbar,
+.panel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chatbot-content::-webkit-scrollbar-track,
+.panel::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+.chatbot-content::-webkit-scrollbar-thumb,
+.panel::-webkit-scrollbar-thumb {
+  background: #2563eb;
+  border-radius: 4px;
+}
+
+.chatbot-content::-webkit-scrollbar-thumb:hover,
+.panel::-webkit-scrollbar-thumb:hover {
+  background: #3b82f6;
+}
+
+/* Improved responsive design for mobile */
+@media (max-width: 768px) {
+  .main {
+    flex-direction: column;
+  }
+  .panel {
+    width: 100%;
+    flex: 0 0 auto;
+    border-right: none;
+    border-bottom: 3px solid #2563eb;
+    max-height: 50vh;
+  }
+  #map {
+    flex: 1;
+    border-left: none;
+    border-top: 3px solid #2563eb;
+  }
+  .disclaimer-banner-content {
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px 16px;
+  }
+  .disclaimer-banner-content p {
+    font-size: 0.85rem;
+  }
+  .top-right-controls {
+    top: 60px;
+    right: 10px;
+    gap: 8px;
+  }
+  button {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+  .result-card {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .panel h2 {
+    font-size: 1rem;
+  }
+  .panel {
+    padding: 12px;
+  }
+  button {
+    font-size: 0.85rem;
+    padding: 8px;
+  }
+  .result-card {
+    font-size: 0.8rem;
+  }
+  .disclaimer-banner-content p {
+    font-size: 0.8rem;
+  }
+  .top-right-controls {
+    flex-wrap: wrap;
+    max-width: calc(100% - 20px);
+  }
+  .chatbot-widget {
+    bottom: 70px;
+    max-height: 400px;
+  }
+}

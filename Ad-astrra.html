@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>☄️ Ad-Astra Asteroid Impact Simulator</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="Ad-astrra.css" />
+</head>
+<body>
+
+    <div class="disclaimer-banner" id="disclaimerBanner">
+        <div class="disclaimer-banner-content">
+            <span class="disclaimer-icon">⚠️</span>
+            <p><strong>Educational Notice:</strong> This simulation is for educational and informative purposes only. It does not represent real-time asteroid impact predictions or actual NASA data analysis.</p>
+            <button class="disclaimer-close" id="disclaimerClose">✖</button>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="panel" id="mainPanel">
+            <h2>☄️ NASA Impact Simulator</h2>
+
+            <label for="searchAsteroid">Search Asteroid</label>
+            <input type="text" id="searchAsteroid" placeholder="🔍 Type asteroid name...">
+
+            <label title="Select a Near-Earth Object from NASA's live data">Choose Asteroid</label>
+            <select id="asteroidSelect"><option>Loading...</option></select>
+
+            <div class="result-card" id="resultCard">
+                <h3>🌍 Impact Info</h3>
+                <b>Name:</b> <span id="astName">--</span><br>
+                <b>Impact:</b> <span id="loc">-- , --</span><br>
+                <b>Diameter:</b> <span id="diameter">--</span> m<br>
+                <b>Velocity:</b> <span id="velocity">--</span> km/s<br>
+                <b>Energy:</b> <span id="energy">--</span> Mt<br>
+                <b>Crater:</b> <span id="crater">--</span> m<br>
+                <b>Shockwave:</b> <span id="shock">--</span> m<br>
+                <b>Seismic:</b> <span id="seismic">--</span> m<br>
+                <b>Global:</b> <span id="global">--</span>
+            </div>
+
+            <button id="resetBtn">🔄 Reset</button>
+            <button id="randomBtn">🎲 Random Impact</button>
+        </div>
+
+        <div id="map"></div>
+    </div>
+
+    <div class="top-right-controls">
+        <button id="watchVideo" title="Watch Tutorial Video">📹 Video</button>
+        <button id="launcher" title="Launch Simulator">🚀 Launcher</button>
+        <button id="showAsteroidViewer" title="View 3D Asteroids">👁 Asteroid Viewer</button>
+    </div>
+
+    <div id="asteroidOverlay">
+        <div class="overlay-content">
+            <button id="closeOverlay">✖</button>
+            <h2>3D Asteroid Viewer</h2>
+            <iframe 
+              src="https://eyes.nasa.gov/apps/asteroids/#/" 
+              width="100%" 
+              height="100%" 
+              style="border: none; border-radius: 10px;">
+            </iframe>
+        </div>
+    </div>
+
+    <div class="chatbot-widget" id="chatbotWidget">
+        <div class="chatbot-header" id="chatbotHeader">
+            <span>💬 FAQ Help</span>
+            <button class="chatbot-close" id="chatbotClose">−</button>
+        </div>
+        <div class="chatbot-content" id="chatbotContent">
+            <div class="faq-item">
+                <button class="faq-question">How do I use the simulator?</button>
+                <div class="faq-answer">
+                    <p>Click anywhere on the map to simulate an asteroid impact at that location. You can also use the "Random Impact" button for a random location.</p>
+                    <iframe width="100%" height="200" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 8px; margin-top: 10px;"></iframe>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">What do the numbers mean?</button>
+                <div class="faq-answer">The simulator shows impact energy (Mt = megatons), crater diameter, shockwave radius, seismic effects, and potential global consequences based on the asteroid's size and velocity.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">How do I choose an asteroid?</button>
+                <div class="faq-answer">Use the dropdown menu to select from real NASA Near-Earth Objects, or search by name using the search box above the dropdown.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Is this data real?</button>
+                <div class="faq-answer">The asteroid data comes from NASA's API, but the impact simulations are educational estimates, not real predictions.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">What's the Asteroid Viewer?</button>
+                <div class="faq-answer">Click the "Asteroid Viewer" button to see NASA's 3D visualization of asteroids in our solar system.</div>
+            </div>
+        </div>
+    </div>
+
+    <button class="chatbot-toggle" id="chatbotToggle">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12c0 1.54.36 3 .97 4.29L2 22l5.71-.97C9 21.64 10.46 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.38 0-2.68-.29-3.86-.81l-.28-.13-2.82.48.48-2.82-.13-.28C4.89 14.68 4.6 13.38 4.6 12c0-4.08 3.32-7.4 7.4-7.4s7.4 3.32 7.4 7.4-3.32 7.4-7.4 7.4z"/>
+            <circle cx="9" cy="12" r="1"/>
+            <circle cx="12" cy="12" r="1"/>
+            <circle cx="15" cy="12" r="1"/>
+        </svg>
+    </button>
+
+    <audio id="sound-explosion" src="https://www.soundjay.com/explosion/sounds/explosion-01.mp3" preload="auto"></audio>
+    <audio id="sound-rumble" src="https://www.soundjay.com/nature/sounds/earthquake-rumble-01.mp3" preload="auto" loop></audio>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    
+    <script src="Ad-astrra.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>☄️Ad-astra Meteor Explosion Simulator</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="Ad-astra.css" />
+</head>
+<body>
+
+<div class="panel">
+  <h2>☄️ Meteor Madness</h2>
+
+  <label>Diameter (m)</label>
+  <input id="diameter" type="range" min="50" max="5000" value="100" step="10">
+  <div class="value"><span id="diamVal">100</span> m</div>
+
+  <label>Velocity (km/s)</label>
+  <input id="velocity" type="range" min="11" max="70" value="20" step="0.1">
+  <div class="value"><span id="velVal">20</span> km/s</div>
+
+  <label>Angle (°)</label>
+  <input id="angle" type="range" min="10" max="90" value="45" step="1">
+  <div class="value"><span id="angVal">45</span>°</div>
+
+  <label>Asteroid Type</label>
+  <select id="type">
+    <option value="rock">🪨 Rock (3000 kg/m³)</option>
+    <option value="iron">🔩 Iron (7800 kg/m³)</option>
+    <option value="ice">❄️ Ice (1000 kg/m³)</option>
+  </select>
+
+  <div class="result-card" id="resultCard">
+    <h3>🌍 Impact Info</h3>
+    <b>Impact:</b> <span id="loc">-- , --</span><br>
+    <b>Energy:</b> <span id="energy">--</span> Mt<br>
+    <b>Crater:</b> <span id="crater">--</span> m<br>
+    <b>Thermal:</b> <span id="thermal">--</span> m<br>
+    <b>Shockwave:</b> <span id="shock">--</span> m<br>
+    <b>Seismic:</b> <span id="seismic">--</span> m<br>
+    <b>Global:</b> <span id="global">--</span> m
+  </div>
+
+  <button id="resetBtn">🔄 Reset</button>
+  <button id="randomBtn">🎲 Random Impact</button>
+</div>
+
+<div id="map"></div>
+
+<audio id="explosionSound" src="https://actions.google.com/sounds/v1/explosions/explosion.ogg"></audio>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="Ad-astra.js"></script>
+</body>
+</html>
