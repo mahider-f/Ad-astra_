@@ -15,6 +15,7 @@
             <button class="disclaimer-close" id="disclaimerClose">✖</button>
         </div>
     </div>
+    
 
     <div class="main">
         <div class="panel" id="mainPanel">
@@ -50,7 +51,13 @@
         <button id="watchVideo" title="Watch Tutorial Video">📹 Video</button>
         <button id="launcher" title="Launch Simulator">🚀 Launcher</button>
         <button id="showAsteroidViewer" title="View 3D Asteroids">👁 Asteroid Viewer</button>
+        <button id="openStrategies" class="open-btn">Mitigation Strategies</button>
     </div>
+    
+    <div class="panel">
+        <a href="../Ad-astrra.html">
+        <button>back</button></a></div>
+  <h2>☄️ Meteor Madness</h2>
 
     <div id="asteroidOverlay">
         <div class="overlay-content">
@@ -64,6 +71,50 @@
             </iframe>
         </div>
     </div>
+ 
+<div id="strategiesOverlay" class="overlay">
+  <div class="overlay-content">
+    <button id="closeStrategies" class="close-btn">✖️</button>
+    <h2>Mitigation Stratagies</h2>
+
+    <div class="card-grid">
+      <article class="pd-card">
+        <h3>🚀 Kinetic Impactor</h3>
+        <p>
+          Crash a spacecraft into the asteroid to push it slightly off course.
+          Tested by NASA <a href="https://www.nasa.gov/planetary-defense/dart/" target="_blank">Learn more</a>.
+        </p>
+      </article>
+
+      <article class="pd-card">
+        <h3>🛰️ Gravity Tractor</h3>
+        <p>
+          A large spacecraft “parks” near the asteroid, using gravity to slowly tug it into a safer orbit.
+          <a href="https://www.nasa.gov/directorates/smd/planetary-science-division/planetary-defense-coordination-office/" target="_blank">Learn more</a>.
+        </p>
+      </article>
+
+      <article class="pd-card">
+        <h3>☢️ Nuclear Deflection</h3>
+        <p>
+          A nuclear explosion near the asteroid provides a powerful shove. High risk, last-resort option.
+          <a href="https://www.nasa.gov/general/pi-terminal-defense-for-humanity/" target="_blank">Learn more</a>.
+        </p>
+      </article>
+
+      <article class="pd-card">
+        <h3>🔬 Other Ideas</h3>
+        <p>
+          Future methods include lasers, asteroid tugboats, and ion beams.
+          <a href="https://www.nasa.gov/wp-content/uploads/2023/06/nasa_-_planetary_defense_strategy_-_final-508.pdf" target="_blank">Learn more</a>.
+        </p>
+      </article>
+    </div>
+  </div>
+</div>
+
+
+
 
     <div class="chatbot-widget" id="chatbotWidget">
         <div class="chatbot-header" id="chatbotHeader">
@@ -75,11 +126,24 @@
                 <button class="faq-question">How do I use the simulator?</button>
                 <div class="faq-answer">
                     <p>Click anywhere on the map to simulate an asteroid impact at that location. You can also use the "Random Impact" button for a random location.</p>
-                    </div>
+                    
+                </div>
             </div>
             <div class="faq-item">
-                <button class="faq-question">What do the numbers mean?</button>
-                <div class="faq-answer">The simulator shows impact energy (Mt = megatons), crater diameter, shockwave radius, seismic effects, and potential global consequences based on the asteroid's size and velocity.</div>
+                <button class="faq-question">What does impact info indicate?</button>
+                <div class="faq-answer"><p>
+<b>Name:</b> The asteroid’s official designation.<br>
+<b>Impact:</b> The latitude and longitude of the simulated strike.<br>
+<b>Diameter:</b> The estimated size of the asteroid in meters.<br>
+<b>Velocity:</b> How fast the asteroid is moving when it hits Earth (in km/s).<br>
+<b>Energy:</b> The total energy released on impact, measured in megatons of TNT.<br>
+<b>Crater:</b> The approximate width of the crater formed at the impact site.<br>
+<b>Shockwave:</b> The radius affected by the blast wave from the explosion.<br>
+<b>Seismic:</b> Ground shaking effects, measured by the distance affected.<br>
+<b>Global:</b> Estimated worldwide effects if the impact is extremely powerful (energy large enough to affect climate and ecosystems globally).<br>
+<b>Eccentricity:</b> How stretched out an asteroid's path is..<br>
+</p>
+</div>
             </div>
             <div class="faq-item">
                 <button class="faq-question">How do I choose an asteroid?</button>
