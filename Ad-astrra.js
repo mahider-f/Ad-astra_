@@ -186,5 +186,23 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         })
     })
+    // Open overlay
+document.getElementById("openStrategies").addEventListener("click", () => {
+  document.getElementById("strategiesOverlay").style.display = "flex";
+});
 
-}); // End of DOMContentLoaded
+// Close overlay
+document.getElementById("closeStrategies").addEventListener("click", () => {
+  document.getElementById("strategiesOverlay").style.display = "none";
+});
+
+// Optional: Close when clicking outside content
+document.getElementById("strategiesOverlay").addEventListener("click", (e) => {
+  if (e.target.id === "strategiesOverlay") {
+    document.getElementById("strategiesOverlay").style.display = "none";
+  }
+});
+
+    
+
+}); 
