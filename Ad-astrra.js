@@ -1,23 +1,19 @@
-// Ad-astrra.js
-
-// FIX: Ensure all DOM manipulation and Leaflet initialization runs AFTER the page loads.
 document.addEventListener("DOMContentLoaded", function() {
 
-    // Check if Leaflet is available globally before proceeding
     const L = window.L;
     if (!L) {
         console.error("Leaflet (L) is not defined. Ensure 'leaflet.js' is loaded before this script.");
         return;
     }
 
-    // --- Map Initialization ---
+    // Map 
     const map = L.map("map").setView([20, 0], 2)
     L.tileLayer("https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}", {
         maxZoom: 20,
         attribution: "USGS",
     }).addTo(map)
 
-    // --- DOM Elements ---
+    // info card
     const asteroidSelect = document.getElementById("asteroidSelect")
     const astName = document.getElementById("astName")
     const locEl = document.getElementById("loc")
@@ -30,18 +26,17 @@ document.addEventListener("DOMContentLoaded", function() {
     const gEl = document.getElementById("global")
 
     let asteroidData = []
-    // NOTE: This API key is public but might need to be replaced if it stops working.
     const apiKey = "g9lgd6tg8kCLb0klT33zqyY0JxfDQKXIDGLkakvi" 
 
     const disclaimerBanner = document.getElementById("disclaimerBanner")
     const disclaimerClose = document.getElementById("disclaimerClose")
 
-    // Removed non-existent elements disclaimerModal and disclaimerBtn.
+    //  disclaimerBtn.
     disclaimerClose.addEventListener("click", () => {
         disclaimerBanner.classList.add("hidden")
     })
 
-    // --- API Fetch: Load Asteroid Data ---
+    //  Load Asteroid Dat
     fetch(`https://api.nasa.gov/neo/rest/v1/neo/browse?api_key=${apiKey}`)
         .then((res) => res.json())
         .then((data) => {
@@ -53,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error("Error fetching asteroid data:", err)
         })
 
-    // --- Effects and Calculation Functions ---
+    //  Effects
     function playExplosion(latlng) {
         const sound = document.getElementById("sound-explosion")
         const rumble = document.getElementById("sound-rumble")
@@ -75,7 +70,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function calcImpact(diameter, velocity) {
-        // Calculation logic is correct
         const mass = (4 / 3) * Math.PI * Math.pow(diameter / 2, 3) * 3000
         const joules = 0.5 * mass * (velocity * 1000) ** 2
         const mt = joules / 4.184e15
@@ -95,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const asteroid = asteroidData.find((a) => a.id === selectedId)
         if (!asteroid || asteroidData.length === 0) return alert("Asteroid data not loaded or selected.")
 
-        // Ensure d and v are calculated
+        
         const d = asteroid.estimated_diameter.meters.estimated_diameter_max.toFixed(0)
         const v = (Math.random() * 30 + 10).toFixed(1)
 
@@ -114,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (impactMarker) map.removeLayer(impactMarker)
         ;[craterCircle, shockCircle].forEach((c) => c && map.removeLayer(c))
 
-        // Add markers/circles
+        // Effects
         impactMarker = L.marker([lat, lng]).addTo(map)
         craterCircle = L.circle([lat, lng], { radius: res.crater / 2, color: "red", fillOpacity: 0.3 }).addTo(map)
         shockCircle = L.circle([lat, lng], { radius: res.shock, color: "yellow", fillOpacity: 0.25 }).addTo(map)
@@ -122,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function() {
         playExplosion({ lat, lng })
     }
 
-    // --- Event Listeners ---
+    // Event Listeners
     map.on("click", (e) => simulate(e.latlng.lat, e.latlng.lng))
 
     document.getElementById("resetBtn").onclick = () => {
