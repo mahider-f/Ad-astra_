@@ -10,7 +10,7 @@ body {
   overflow: hidden;
 }
 
-/* Converted modal to dismissible header banner */
+/*disclaimer banner*/
 .disclaimer-banner {
   position: fixed;
   top: 0;
@@ -253,7 +253,7 @@ button:active {
   transform: translateY(0);
 }
 
-/* Repositioned controls to be horizontal and above map with higher z-index */
+ 
 .top-right-controls {
   position: fixed;
   top: 20px;
@@ -405,7 +405,7 @@ button:active {
   text-decoration: none;
 }
 
-/* Chatbot positioned above map with higher z-index */
+/* Chatbot position */
 .chatbot-toggle {
   position: fixed;
   bottom: 20px;
@@ -566,7 +566,7 @@ button:active {
   background: #3b82f6;
 }
 
-/* Improved responsive design for mobile */
+/*responsive design for mobile */
 @media (max-width: 768px) {
   .main {
     flex-direction: column;
